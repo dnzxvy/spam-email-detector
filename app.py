@@ -1,5 +1,6 @@
 import kagglehub
 import nltk
+from nltk.corpus import stopwords
 import pandas as pd
 import matplotlib.pyplot as plt
 from collections import Counter
@@ -57,8 +58,15 @@ ham_text = " ".join(ham_emails["Message"]) # combining all spam and ham messages
 spam_text = spam_text.lower()
 ham_text = ham_text.lower()
 
+nltk.download("stopwords")
+
+stop_words = set(stopwords.words("english"))
+
 spam_words = spam_text.split()
 ham_words = ham_text.split()
+
+spam_words = [word for word in spam_words if word not in stop_words]
+ham_words = [word for word in ham_words if word not in stop_words]
 
 spam_word_counts = Counter(spam_words)
 ham_word_counts = Counter(ham_words)
@@ -107,6 +115,8 @@ axes[1].tick_params(axis="x", rotation=45)
 plt.tight_layout()
 plt.show()
 
+
+# Punctuation Analysis
 
 
 
