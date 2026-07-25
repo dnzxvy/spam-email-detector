@@ -158,4 +158,36 @@ plt.xticks(rotation=0)
 
 plt.show()
 
+
+# Number Analysis
+
+spam_dataset["number_count"] = spam_dataset["Message"].apply(
+    lambda x: sum(char.isdigit() for char in x)
+)
+
+average_numbers = spam_dataset.groupby("Category")["number_count"].mean()
+print(average_numbers)
+
+average_numbers.plot(kind="bar")
+
+plt.title("Average Number of Numerical Digits per Email")
+plt.xlabel("Category")
+plt.ylabel("Average Number of Digits")
+
+plt.xticks(rotation=0)
+
+plt.show()
+
+spam_dataset.boxplot(
+    column="number_count",
+    by="Category"
+)
+
+plt.title("Distribution of Numerical Values by Email Category")
+plt.suptitle("")  # Removes the automatic title added by pandas
+plt.xlabel("Category")
+plt.ylabel("Number Count")
+
+plt.show()
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
