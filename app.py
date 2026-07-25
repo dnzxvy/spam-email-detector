@@ -118,6 +118,7 @@ plt.show()
 
 # Punctuation Analysis
 
+# Amount of exclamation marks within emails
 cnt_spam = spam_text.count("!")
 cnt_ham = ham_text.count("!")
 print(f"the amount of times the character ! appeared within spam emails is: {cnt_spam}, and for ham emails it appeared: {cnt_ham} times")
@@ -136,4 +137,25 @@ plt.ylabel("Average Number of Punctuation Marks")
 plt.xticks(rotation=0)
 
 plt.show()
+
+# Amount of question marks within emails
+cnt_qm_spam = spam_text.count("?")
+cnt_qm_ham = ham_text.count("?")
+print(f"the amount of times the character ? appeared within spam emails is: {cnt_qm_spam}, and for ham emails it appeared: {cnt_qm_ham} times")
+
+spam_dataset["question_mark_count"] = spam_dataset["Message"].apply(lambda x: x.count("?"))
+
+print(spam_dataset.groupby("Category")["question_mark_count"].mean())
+
+spam_dataset.groupby("Category")["question_mark_count"].mean().plot(
+    kind="bar"
+)
+
+plt.title("Average Number of Question Marks per Email")
+plt.xlabel("Email Category")
+plt.ylabel("Average Number of Question Marks")
+plt.xticks(rotation=0)
+
+plt.show()
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
