@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 import pandas as pd
 import matplotlib.pyplot as plt
 from collections import Counter
+import re
 
 # Downloading spam email classification
 path = kagglehub.dataset_download("ashfakyeafi/spam-email-classification")
@@ -178,15 +179,40 @@ plt.xticks(rotation=0)
 
 plt.show()
 
+# box plot
 spam_dataset.boxplot(
     column="number_count",
     by="Category"
 )
 
 plt.title("Distribution of Numerical Values by Email Category")
-plt.suptitle("")  # Removes the automatic title added by pandas
+plt.suptitle("")
 plt.xlabel("Category")
 plt.ylabel("Number Count")
+
+plt.show()
+
+# Length of numerical sequences
+
+def longest_number_length(text):
+    numbers = re.findall(r"\d+", text) #\d = any digit and + = one or more
+    #consecutive digits
+
+    if not numbers:
+        return 0
+    return max(len(number)for number in numbers)
+
+spam_dataset["longest_number_length"] = spam_dataset["Message"].apply(longest_number_length)
+average_number_length = spam_dataset.groupby("Category")["longest_number_length"].mean()
+print(average_number_length)
+
+average_number_length.plot(kind="bar")
+
+plt.title("Average Length of the Longest Numerical Sequence")
+plt.xlabel("Category")
+plt.ylabel("Average Number of Digits")
+
+plt.xticks(rotation=0)
 
 plt.show()
 
