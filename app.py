@@ -247,14 +247,30 @@ spam_dataset["pound_count"] = spam_dataset["Message"].apply(
 average_pound = spam_dataset.groupby("Category")["pound_count"].mean()
 print(average_pound)
 
-""" Making a count of the euro symbol shown in emails
+# Plot displaying average symbols including punctuation mark symbols (!, ?)
 
-spam_dataset["euro_count"] = spam_dataset["Message"].apply(
-    lambda x: x.count("€")
+spam_dataset["exclamation_count"] = spam_dataset["Message"].apply(lambda x: x.count("!"))
+spam_dataset["question_mark_count"] = spam_dataset["Message"].apply(lambda x: x.count("?"))
+spam_dataset["percent_count"] = spam_dataset["Message"].apply(lambda x: x.count("%"))
+spam_dataset["pound_count"] = spam_dataset["Message"].apply(lambda x: x.count("£"))
+spam_dataset["dollar_count"] = spam_dataset["Message"].apply(lambda x: x.count("$"))
 
-)
-average_euro = spam_dataset.groupby("Category")["euro_count"].mean()
-print(average_euro)"""
+symbol_analysis = spam_dataset.groupby("Category")[[
+    "exclamation_count",
+    "question_mark_count",
+    "percent_count",
+    "pound_count",
+    "dollar_count"
+]].mean()
 
+symbol_analysis.plot(kind="bar")
 
+plt.title("Average Promotional Symbol Usage by Email Category")
+plt.xlabel("Category")
+plt.ylabel("Average Count per Email")
+plt.xticks(rotation=0)
+
+plt.legend(title="Symbol")
+
+plt.show()
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
