@@ -216,4 +216,45 @@ plt.xticks(rotation=0)
 
 plt.show()
 
+# Symbol Analysis
+
+spam_dataset["percent_count"] = spam_dataset["Message"].apply(
+    lambda x: x.count("%") # Making a count of percentage symbol shown in emails
+
+)
+
+average_percent = spam_dataset.groupby("Category")["percent_count"].mean()
+
+print(average_percent)
+
+# Making a count of dollar symbol shown in emails
+
+spam_dataset["dollar_count"] = spam_dataset["Message"].apply(
+    lambda x: x.count("$")
+
+)
+
+average_dollar = spam_dataset.groupby("Category")["dollar_count"].mean()
+
+print(average_dollar)
+
+# Making a count of pound (sterling) symbol shown in emails
+
+spam_dataset["pound_count"] = spam_dataset["Message"].apply(
+    lambda x: x.count("£")
+
+)
+average_pound = spam_dataset.groupby("Category")["pound_count"].mean()
+print(average_pound)
+
+""" Making a count of the euro symbol shown in emails
+
+spam_dataset["euro_count"] = spam_dataset["Message"].apply(
+    lambda x: x.count("€")
+
+)
+average_euro = spam_dataset.groupby("Category")["euro_count"].mean()
+print(average_euro)"""
+
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
