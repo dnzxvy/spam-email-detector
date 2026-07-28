@@ -285,5 +285,15 @@ spam_dataset["url_count"] = spam_dataset["Message"].apply(count_urls)
 
 average_urls = spam_dataset.groupby("Category")["url_count"].mean()
 print(average_urls)
+
+average_urls.plot(kind = "bar")
+
+plt.title("Average count of URLs within Spam & Ham Emails")
+plt.xlabel("Category")
+plt.ylabel("Average Count of URLs")
+plt.xticks(rotation=0)
+
+plt.show()
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
