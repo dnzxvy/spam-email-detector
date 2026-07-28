@@ -273,4 +273,17 @@ plt.xticks(rotation=0)
 plt.legend(title="Symbol")
 
 plt.show()
+
+
+# URL Analysis
+
+def count_urls(text):
+    urls = re.findall(r"https?://\S+|www\.\S+", text) # finds different type of url in emails
+    return len(urls)
+
+spam_dataset["url_count"] = spam_dataset["Message"].apply(count_urls)
+
+average_urls = spam_dataset.groupby("Category")["url_count"].mean()
+print(average_urls)
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
+
