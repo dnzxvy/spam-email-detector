@@ -116,6 +116,12 @@ axes[1].tick_params(axis="x", rotation=45)
 plt.tight_layout()
 plt.show()
 
+spam_dataset["word_count"] = spam_dataset["Message"].apply(
+    lambda x: len(x.split())
+)
+
+average_numbers = spam_dataset.groupby("Category")["number_count"].mean()
+print(average_numbers)
 
 # Punctuation Analysis
 
@@ -295,5 +301,24 @@ plt.xticks(rotation=0)
 
 plt.show()
 
+# Correlation Analysis
+
+correlation_features = spam_dataset[[
+    "word_count",
+    "email_length",
+    "url_count",
+    "exclamation_count",
+    "question_mark_count",
+    "number_count",
+    "longest_number_length",
+    "percent_count",
+    "dollar_count",
+    "pound_count",
+]]
+
+# Calculating correlation matrix
+
+correlation_matrix = correlation_features.corr()
+print(correlation_matrix)
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
