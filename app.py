@@ -120,8 +120,8 @@ spam_dataset["word_count"] = spam_dataset["Message"].apply(
     lambda x: len(x.split())
 )
 
-average_numbers = spam_dataset.groupby("Category")["number_count"].mean()
-print(average_numbers)
+average_words = spam_dataset.groupby("Category")["word_count"].mean()
+print(average_words)
 
 # Punctuation Analysis
 
@@ -320,5 +320,34 @@ correlation_features = spam_dataset[[
 
 correlation_matrix = correlation_features.corr()
 print(correlation_matrix)
+
+# Plotting correlation matrix
+
+plt.figure(figsize=(10, 8))
+plt.imshow(correlation_matrix, cmap="coolwarm", interpolation="nearest")
+plt.colorbar(label="Correlation")
+plt.xticks(
+    range(len(correlation_matrix.columns)),
+    correlation_matrix.columns,
+    rotation=45,
+    ha="right"
+)
+plt.yticks(
+    range(len(correlation_matrix.columns)),
+    correlation_matrix.columns
+)
+for i in range(len(correlation_matrix)):
+    for j in range(len(correlation_matrix.columns)):
+        plt.text(
+            j,
+            i,
+            f"{correlation_matrix.iloc[i, j]:.2f}",
+            ha="center",
+            va="center",
+            color="black"
+        )
+plt.title("Correlation Matrix of Email Features")
+plt.tight_layout()
+plt.show()
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
