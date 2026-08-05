@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from collections import Counter
 import re
+from sklearn.preprocessing import LabelEncoder
 
 # Downloading spam email classification
 path = kagglehub.dataset_download("ashfakyeafi/spam-email-classification")
@@ -349,5 +350,18 @@ for i in range(len(correlation_matrix)):
 plt.title("Correlation Matrix of Email Features")
 plt.tight_layout()
 plt.show()
+
+
+##### Machine Learning Phase ########
+
+# Preparing the dataset
+x = spam_dataset["Message"]
+y = spam_dataset["Category"]
+
+# Turn labels into numerical values
+
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
