@@ -21,8 +21,14 @@ print("Path to dataset files:", path)
 # loading spam email dataset
 csv_path = path + "/SpamEmail Dataset.csv"
 
+
 spam_dataset = pd.read_csv(csv_path)
 print(spam_dataset.head())
+
+spam_dataset = spam_dataset[
+    spam_dataset["Category"].isin(["ham", "spam"])
+]
+spam_dataset = spam_dataset.reset_index(drop=True)
 
 print(spam_dataset["Category"].value_counts())
 
@@ -369,14 +375,20 @@ y = spam_dataset["Category"]
 encoder = LabelEncoder()
 y = encoder.fit_transform(y)
 
-print(encoder.classes_)
-print(y[:10]) # checking if encoder code worked supposed to have ham as 0
+#print(encoder.classes_)
+#print(y[:10]) # checking if encoder code worked supposed to have ham as 0
 # and spam as 1
 
 # COnvert text into numbers via tf-idf
 
 tfidf = TfidfVectorizer(stop_words="english", max_features=5000)
-X =  tfidf.fit_transform(X)
+X = tfidf.fit_transform(X)
+
+print(spam_dataset["Category"].value_counts())
+
+print(encoder.classes_)
+
+
 
 # Splitting the dataset
 X_train, X_test, y_train, y_test = train_test_split(
@@ -394,7 +406,9 @@ model.fit(X_train, y_train)
 # Generating predictions for the model
 prediction = model.predict(X_test)
 
-
+# Evaluating the model
+accuracy = accuracy_score(y_test, prediction)
+print(f"Accuracy: {accuracy:.2%}")
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
