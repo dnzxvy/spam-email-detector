@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from collections import Counter
 import re
 from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
 
 # Downloading spam email classification
 path = kagglehub.dataset_download("ashfakyeafi/spam-email-classification")
@@ -355,13 +357,27 @@ plt.show()
 ##### Machine Learning Phase ########
 
 # Preparing the dataset
-x = spam_dataset["Message"]
+X = spam_dataset["Message"]
 y = spam_dataset["Category"]
 
 # Turn labels into numerical values
 
 encoder = LabelEncoder()
 y = encoder.fit_transform(y)
+
+print(encoder.classes_)
+print(y[:10]) # checking if encoder code worked supposed to have ham as 0
+# and spam as 1
+
+# COnvert text into numbers via tf-idf
+
+tfidf = TfidfVectorizer(stop_words="english", max_features=5000)
+X =  tfidf.fit_transform(X)
+
+# Splitting the dataset
+X_train, X_test, y_train, y_test = train_test_split(test_size=0.2,
+                                                    random_state=42,
+                                                    stratify=y)
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
