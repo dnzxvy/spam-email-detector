@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 import joblib
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 
 
 # Downloading spam email classification
@@ -409,6 +410,8 @@ prediction = model.predict(X_test)
 # Evaluating the model
 accuracy = accuracy_score(y_test, prediction)
 print(f"Accuracy: {accuracy:.2%}")
+
+print(classification_report(y_test, prediction))
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 

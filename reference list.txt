@@ -6,3 +6,5 @@ Ellis, C. (2023). Spam Statistics - 2023 Survey and Data Analysis | Email Toolte
 James, E. (2021). What Is Correlation Analysis? Definition and Exploration. [online] Flexmr. Available at: https://blog.flexmr.net/correlation-analysis-definition-exploration [Accessed 30 July 2026].
 
 Ide, M. Nolet, C. Text Classification with Naive Bayes Algorithms. (2022). [online] NVIDIA Technical Blog. Available at: https://developer.nvidia.com/blog/faster-text-classification-with-naive-bayes-and-gpus/ [Accessed 7 Aug. 2026].
+
+scikit-learn (2018). sklearn.metrics.classification_report — scikit-learn 0.20.3 documentation. [online] Scikit-learn.org. Available at: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html [Accessed 10 Aug. 2026].
