@@ -417,6 +417,25 @@ print(classification_report(y_test, prediction))
 
 ### Testing a Second Model using Logisitc Regression
 
+logistic_model = LogisticRegression(max_iter=1000)
+# max_iter gives the algorithm 1000 iterations to find
+# appropriate solutions
+
+# Train model
+logistic_model.fit(X_train,y_train)
+
+# Making predictions for Logistic Regression Model
+logistic_predictions = logistic_model.predict(X_test)
+
+# Calculating the Accuracy
+logistic_accuracy = accuracy_score(
+    y_test,
+    logistic_predictions
+)
+print(f"Logistic Regression Accuracy: {logistic_accuracy:.2%}")
+
+# Classification Report for Logistic Regression
+print(classification_report(y_test, logistic_predictions))
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
