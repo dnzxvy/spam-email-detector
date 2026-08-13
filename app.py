@@ -12,6 +12,8 @@ from sklearn.naive_bayes import MultinomialNB
 import joblib
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
+from sklearn.linear_model import LogisticRegression
+
 
 
 # Downloading spam email classification
@@ -412,6 +414,9 @@ accuracy = accuracy_score(y_test, prediction)
 print(f"Accuracy: {accuracy:.2%}")
 
 print(classification_report(y_test, prediction))
+
+### Testing a Second Model using Logisitc Regression
+
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
