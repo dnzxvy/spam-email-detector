@@ -10,3 +10,5 @@ Ide, M. Nolet, C. Text Classification with Naive Bayes Algorithms. (2022). [onli
 scikit-learn (2018). sklearn.metrics.classification_report — scikit-learn 0.20.3 documentation. [online] Scikit-learn.org. Available at: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html [Accessed 10 Aug. 2026].
 
 Lee, F. (2025). Logistic Regression. [online] Ibm.com. Available at: https://www.ibm.com/think/topics/logistic-regression [Accessed 13 Aug. 2026].
+
+scikit-learn (2018). 1.4. Support Vector Machines. [online] Scikit-learn.org. Available at: https://scikit-learn.org/stable/modules/svm.html [Accessed 18 Aug. 2026].
