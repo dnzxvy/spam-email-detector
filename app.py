@@ -13,6 +13,8 @@ import joblib
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC
+
 
 
 
@@ -436,6 +438,24 @@ print(f"Logistic Regression Accuracy: {logistic_accuracy:.2%}")
 
 # Classification Report for Logistic Regression
 print(classification_report(y_test, logistic_predictions))
+
+### Testing a 3rd Model using SVM ####
+
+svm_model = LinearSVC()
+
+# train svm model
+svm_model.fit(X_train, y_train)
+
+# make predictions for the model
+svm_predictions = svm_model.predict(X_test)
+
+#calculating accuracy
+
+svm_accuracy = accuracy_score(
+    y_test,
+    svm_predictions
+)
+print(f"Support Vector Machine Accuracy: {svm_accuracy:.2%}")
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
