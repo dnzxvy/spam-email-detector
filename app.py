@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
+from sklearn.metrics import ConfusionMatrixDisplay
 
 
 
@@ -459,6 +460,35 @@ print(f"Support Vector Machine Accuracy: {svm_accuracy:.2%}")
 
 # Classification Report for Support Vector Machines
 print(classification_report(y_test, svm_predictions))
+
+## Analysing The three model via Confusion Matrices
+
+#Naive Bayes
+ConfusionMatrixDisplay.from_predictions(
+    y_test,
+    prediction
+)
+
+plt.title("Naive Bayes Confusion Matrix")
+#plt.show()
+plt.savefig("naive_bayes_matrix.png")
+#Logisitc Regression
+ConfusionMatrixDisplay.from_predictions(
+    y_test,
+    logistic_predictions
+)
+plt.title("Logistic Regression Confusion Matrix")
+#plt.show()
+plt.savefig("log_regression_matrix.png")
+#SVM
+
+ConfusionMatrixDisplay.from_predictions(
+    y_test,
+    svm_predictions
+)
+plt.title("Support Vector Machine Confusion Matrix")
+#plt.show()
+plt.savefig("svm_correlation_matrix.png")
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
