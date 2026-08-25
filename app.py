@@ -457,5 +457,8 @@ svm_accuracy = accuracy_score(
 )
 print(f"Support Vector Machine Accuracy: {svm_accuracy:.2%}")
 
+# Classification Report for Support Vector Machines
+print(classification_report(y_test, svm_predictions))
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
