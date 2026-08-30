@@ -15,3 +15,5 @@ scikit-learn (2018). 1.4. Support Vector Machines. [online] Scikit-learn.org. Av
 
 Belcic, I. and Stryker, C. (2024). What Is Hyperparameter Tuning? | IBM. [online] Ibm.com. Available at: https://www.ibm.com/think/topics/hyperparameter-tuning [Accessed 27 Aug. 2026].
 
+Verma, A. (2023). GridSearchCV in scikit-learn: A Comprehensive Guide. [online] DEV Community. Available at: https://dev.to/anurag629/gridsearchcv-in-scikit-learn-a-comprehensive-guide-2a72 [Accessed 30 Aug. 2026].
+

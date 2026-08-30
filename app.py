@@ -15,6 +15,7 @@ from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.model_selection import GridSearchCV
 
 
 
@@ -490,5 +491,26 @@ plt.title("Support Vector Machine Confusion Matrix")
 #plt.show()
 plt.savefig("svm_correlation_matrix.png")
 
+
+### Hyperparameter Tuning SVM Model ####
+
+svm = LinearSVC(max_iter=5000)
+
+param_grid = {
+    "C": [0.01, 0.1, 1, 10, 100]
+}
+
+grid_search = GridSearchCV(
+    svm,
+    param_grid,
+    cv=5, # training data is divided into 5 sections
+    scoring="f1", # this measures precision and recall
+    n_jobs=1
+)
+
+grid_search.fit(X_train, y_train)
+
+print("Best C:", grid_search.best_params_)
+print("Best F1 Score:", grid_search.best_score_)
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
