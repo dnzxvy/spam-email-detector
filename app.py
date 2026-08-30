@@ -512,5 +512,16 @@ grid_search.fit(X_train, y_train)
 
 print("Best C:", grid_search.best_params_)
 print("Best F1 Score:", grid_search.best_score_)
+
+best_svm = grid_search.best_estimator_
+tuned_svm_predictions = best_svm.predict(X_test)
+
+tuned_accuracy = accuracy_score(
+    y_test,
+    tuned_svm_predictions
+)
+print(f"Tuned SVM Accuracy: {tuned_accuracy:.2%}")
+
+print(classification_report(y_test, tuned_svm_predictions))
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
