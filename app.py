@@ -526,7 +526,7 @@ print(classification_report(y_test, tuned_svm_predictions))
 
 ### Creating New Emails to test on SVM Model ###
 
-new_emails = [
+"""new_emails = [
 "Congratulations! You have won £500. Click here to claim your prize now!",
     "Hi, just confirming that our meeting is scheduled for tomorrow at 2pm.",
     "URGENT! You have been selected for a cash reward. Send your bank details to receive your money.",
@@ -535,6 +535,53 @@ new_emails = [
     "Your Amazon order has been dispatched and will arrive tomorrow.",
     "everything good my love, i just haven't heard from you lately. please reply im worried lol",
     "I just sent the ZIP file attached below. Please check all facts and files are correct and verified. Yours Sincerly, Mark"
+]"""
+new_emails = [
+    # Spam
+    "Congratulations! You have won £10,000 in our exclusive prize draw. Click here to claim your winnings now!",
+    "URGENT: Your account has been selected for a cash reward of £5,000. Verify your details to receive payment.",
+    "You are today's lucky winner! Claim your FREE iPhone before this offer expires.",
+    "Get rich from home! Earn £500 per day with our proven online business opportunity. Sign up now!",
+    "FINAL NOTICE: Your £2,500 reward is waiting. Click the link below to claim it immediately.",
+    "Congratulations, you have been chosen to receive a brand new car. Reply YES to claim your prize.",
+    "WINNER! You have won a £1,000 Amazon voucher. Complete the short survey to receive your reward.",
+    "Make money fast with this incredible investment opportunity. Deposit £100 today and start earning thousands.",
+    "Your mobile number has been selected for a special cash promotion. Claim your £750 reward now!",
+    "FREE entry! You could win £50,000 this weekend. Text WIN to 80000 to enter the competition.",
+    "Your bank account has been selected for a security upgrade. Confirm your account information using the link provided.",
+    "Exclusive offer just for you! Buy now and receive 90% off your order. This offer expires tonight!",
+    "You have been pre-approved for a £20,000 loan. No credit check required. Apply now to receive your money.",
+    "Congratulations! Your email address has won our monthly lottery. Send your details to claim your £15,000 prize.",
+    "ACT NOW! Your reward will expire in 24 hours. Click here to confirm your eligibility and collect your cash.",
+
+    # Ham
+    "Hi Sarah, just checking whether you are still available for our meeting tomorrow afternoon.",
+    "Can you send me the latest version of the report when you get a chance? Thanks.",
+    "Hey, everything good? I haven't heard from you lately so just wanted to check in.",
+    "Your Amazon order has been dispatched and is expected to arrive tomorrow.",
+    "Hi John, I have attached the project files. Please check them before our meeting on Friday.",
+    "Just a reminder that your dentist appointment is scheduled for Tuesday at 10am.",
+    "Thanks for sending the documents. I will review them tonight and let you know if anything needs changing.",
+    "The university has confirmed that the lecture will start at 2pm instead of 1pm tomorrow.",
+    "Hi Mum, I'll be home around 7 tonight. Do you need me to pick anything up on the way?",
+    "Your monthly electricity bill is now available to view through your online account.",
+    "Hi Mark, are you free for a quick call this afternoon to discuss the project?",
+    "Thanks for your help earlier. I managed to fix the issue with the software.",
+    "The football match starts at 8pm tonight. Let me know if you want to watch it together.",
+    "I've attached the ZIP file containing the updated documents. Please let me know if you have any problems opening it.",
+    "Your appointment has been confirmed for 3:30pm on Thursday. Please arrive ten minutes early."
+]
+
+actual_labels = [
+    # 15 Spam
+    1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1,
+
+    # 15 Ham
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
 ]
 
 # Converting emails using TF-IDF
@@ -543,13 +590,32 @@ new_emails_tfidf = tfidf.transform(new_emails)
 # predictions
 new_predictions = best_svm.predict(new_emails_tfidf)
 
-for email, prediction in zip(new_emails, new_predictions):
-    if prediction == 1:
-        category = "Spam"
-    else:
-        category = "Ham"
+for email, actual, prediction in zip(
+    new_emails,
+    actual_labels,
+    new_predictions
+):
+
+    actual_category = "Spam" if actual == 1 else "Ham"
+    predicted_category = "Spam" if prediction == 1 else "Ham"
+
     print(f"\nEmail: {email}")
-    print(f"Prediction: {category}")
+    print(f"Actual: {actual_category}")
+    print(f"Prediction: {predicted_category}")
+
+new_accuracy = accuracy_score(
+    actual_labels,
+    new_predictions
+)
+
+print(f"New Email Accuracy: {new_accuracy:.2%}")
+
+print("\nClassification Report:")
+print(classification_report(
+    actual_labels,
+    new_predictions,
+    target_names=["Ham", "Spam"]
+))
 
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
