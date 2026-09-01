@@ -523,5 +523,33 @@ tuned_accuracy = accuracy_score(
 print(f"Tuned SVM Accuracy: {tuned_accuracy:.2%}")
 
 print(classification_report(y_test, tuned_svm_predictions))
+
+### Creating New Emails to test on SVM Model ###
+
+new_emails = [
+"Congratulations! You have won £500. Click here to claim your prize now!",
+    "Hi, just confirming that our meeting is scheduled for tomorrow at 2pm.",
+    "URGENT! You have been selected for a cash reward. Send your bank details to receive your money.",
+    "Hi John, can you send me the report before the meeting this afternoon?",
+    "You are the lucky winner of a brand new iPhone. Claim your free prize today!",
+    "Your Amazon order has been dispatched and will arrive tomorrow.",
+    "everything good my love, i just haven't heard from you lately. please reply im worried lol",
+    "I just sent the ZIP file attached below. Please check all facts and files are correct and verified. Yours Sincerly, Mark"
+]
+
+# Converting emails using TF-IDF
+new_emails_tfidf = tfidf.transform(new_emails)
+
+# predictions
+new_predictions = best_svm.predict(new_emails_tfidf)
+
+for email, prediction in zip(new_emails, new_predictions):
+    if prediction == 1:
+        category = "Spam"
+    else:
+        category = "Ham"
+    print(f"\nEmail: {email}")
+    print(f"Prediction: {category}")
+
 #spam_dataset.to_csv("SpamEmail Dataset V2", index=False)
 
