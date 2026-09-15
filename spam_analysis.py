@@ -464,8 +464,8 @@ print(f"Support Vector Machine Accuracy: {svm_accuracy:.2%}")
 print(classification_report(y_test, svm_predictions))
 
 # Saving the trained SVM model as it was the best one performance wise
-joblib.dump(svm_model, "spam_model.pk1")
-joblib.dump(tfidf, "tfidf_vectorizer.pk1")
+joblib.dump(svm_model, "spam_model.pkl")
+joblib.dump(tfidf, "tfidf_vectorizer.pkl")
 print("Model and vectorizer saved")
 
 
