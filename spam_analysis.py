@@ -16,6 +16,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.model_selection import GridSearchCV
+import joblib
 
 
 
@@ -461,6 +462,12 @@ print(f"Support Vector Machine Accuracy: {svm_accuracy:.2%}")
 
 # Classification Report for Support Vector Machines
 print(classification_report(y_test, svm_predictions))
+
+# Saving the trained SVM model as it was the best one performance wise
+joblib.dump(svm_model, "spam_model.pk1")
+joblib.dump(tfidf, "tfidf_vectorizer.pk1")
+print("Model and vectorizer saved")
+
 
 ## Analysing The three model via Confusion Matrices
 
